@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+            background: #eef2f7;
+        }
+
+        .container {
+            width: 90%;
+            margin: 40px auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 28px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        thead {
+            background: #007bff;
+            color: white;
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: center;
+            font-size: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: #f5f9ff;
+            transition: 0.3s;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            transition: 0.2s ease-in-out;
+        }
+
+        .edit-btn {
+            background: #17a2b8;
+        }
+        .edit-btn:hover {
+            background: #138496;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+        }
+        .delete-btn:hover {
+            background: #b02a37;
+        }
+
+        .add-user-btn {
+            display: block;
+            margin: 0 auto 20px;
+            background: #28a745;
+            width: 180px;
+            font-size: 16px;
+            border-radius: 30px;
+        }
+        .add-user-btn:hover {
+            background: #218838;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+
+        <h2>Users List</h2>
+
+        <!-- Create User -->
+        <form action="/create" method="GET">
+            <button class="btn add-user-btn">+ Add User</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th style="width: 180px;">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% users.forEach((user) => { %>
+                <tr>
+                    <td><%= user.id %></td>
+                    <td><%= user.name %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.age %></td>
+                    <td><%= user.gender %></td>
+
+                    <td>
+                        <form action="/update/<%= user.id %>" method="GET" style="display:inline;">
+                            <button class="btn edit-btn">Edit</button>
+                        </form>
+
+                        <form action="/delete/<%= user.id %>" method="POST" style="display:inline;">
+                            <button class="btn delete-btn" onclick="return confirm('Do you really want to delete this user?')">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+    </div>
+
+</body>
+</html>
