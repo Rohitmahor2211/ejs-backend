@@ -11,7 +11,7 @@ app.set("view engine" , "ejs")
 
 
 app.get('/create', (req,res)=>{
-    res.render("create_user")
+    res.render("create_user")  
 })
 
 
